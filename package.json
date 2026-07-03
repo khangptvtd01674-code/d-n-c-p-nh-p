@@ -1,0 +1,16 @@
+{
+  "name": "premiumjob-recruitment",
+  "version": "1.0.0",
+  "description": "Website Tuyển Dụng Việc Làm Cao Cấp Dark Mode - Đồ án Tốt nghiệp",
+  "scripts": {
+    "dev": "npx http-server -p 3000"
+  },
+  "keywords": [
+    "recruitment",
+    "jobs",
+    "darkmode",
+    "vanilla-js"
+  ],
+  "author": "Group C3 SD2001",
+  "license": "MIT"
+}

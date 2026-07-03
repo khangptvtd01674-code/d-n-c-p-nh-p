@@ -1,0 +1,1944 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PremiumJob | Website Tuyển Dụng & Việc Làm Hàng Đầu</title>
+  <meta name="description" content="Khám phá cơ hội nghề nghiệp phù hợp với bạn trên PremiumJob. Nền tảng kết nối ứng viên tài năng và nhà tuyển dụng hàng đầu với giao diện Dark Mode chuyên nghiệp.">
+  <link rel="stylesheet" href="index.css">
+</head>
+<body>
+
+  <!-- TOAST NOTIFICATION CONTAINER -->
+  <div id="toastContainer" class="toast-container"></div>
+
+  <!-- APPLICATION SHELL -->
+  <div id="app">
+    
+    <!-- HEADER NAVBAR (FOR PUBLIC PAGES) -->
+    <header class="navbar" id="publicNav">
+      <div class="logo" onclick="navigateTo('home')">
+        <svg width="32" height="32" viewBox="0 0 32 32">
+          <defs>
+            <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#00b14f" />
+              <stop offset="100%" stop-color="#14a800" />
+            </linearGradient>
+          </defs>
+          <path d="M6 10 C6 7.8 7.8 6 10 6 L22 6 C24.2 6 26 7.8 26 10 L26 22 C26 24.2 24.2 26 22 26 L10 26 C7.8 26 6 24.2 6 22 Z" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M12 18 L16 14 L20 18" stroke="url(#logoGradient)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="16" cy="11" r="2" fill="#00b14f"/>
+        </svg>
+        <span>PremiumJob</span>
+      </div>
+
+      <nav>
+        <ul class="nav-links">
+          <li><a href="#home" onclick="navigateTo('home')" class="active">Trang chủ</a></li>
+          <li><a href="#jobs" onclick="navigateTo('jobs')">Việc làm</a></li>
+          <li class="nav-dropdown">
+            <a href="#companies" onclick="event.preventDefault(); handleCompanyHeaderClick()" class="dropdown-trigger">
+              Công ty
+              <svg class="dropdown-icon" width="10" height="6" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="1 1 5 5 9 1"></polyline>
+              </svg>
+            </a>
+            <ul class="dropdown-menu">
+              <li><a href="#" onclick="event.preventDefault(); handleCompanyFilter('Tiêu Biểu')">Tiêu Biểu</a></li>
+              <li><a href="#" onclick="event.preventDefault(); handleCompanyFilter('Nổi Bật')">Nổi Bật</a></li>
+              <li><a href="#" onclick="event.preventDefault(); handleCompanyFilter('Ngân Hàng')">Ngân Hàng</a></li>
+              <li><a href="#" onclick="event.preventDefault(); handleCompanyFilter('Bảo Hiểm')">Bảo Hiểm</a></li>
+              <li><a href="#" onclick="event.preventDefault(); handleCompanyFilter('Công Nghệ')">Công Nghệ</a></li>
+              <li><a href="#" onclick="event.preventDefault(); handleCompanyFilter('Xây Dựng')">Xây Dựng</a></li>
+              <li><a href="#" onclick="event.preventDefault(); handleCompanyFilter('Sản Xuất')">Sản Xuất</a></li>
+              <li><a href="#" onclick="event.preventDefault(); handleCompanyFilter('Nhà Hàng')">Nhà Hàng</a></li>
+              <li><a href="#" onclick="event.preventDefault(); handleCompanyFilter('Khách Sạn')">Khách Sạn</a></li>
+              <li><a href="#" onclick="event.preventDefault(); handleCompanyFilter('Y Tế')">Y Tế</a></li>
+              <li><a href="#" onclick="event.preventDefault(); handleCompanyFilter('Bất Động Sản')">Bất Động Sản</a></li>
+              <li><a href="#" onclick="event.preventDefault(); handleCompanyFilter('Giáo Dục')">Giáo Dục</a></li>
+            </ul>
+          </li>
+          <li class="nav-dropdown">
+            <a href="#" onclick="event.preventDefault();" class="dropdown-trigger">
+              CV/Hồ sơ
+              <svg class="dropdown-icon" width="10" height="6" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="1 1 5 5 9 1"></polyline>
+              </svg>
+            </a>
+            <ul class="dropdown-menu">
+              <li><a href="#" onclick="event.preventDefault(); handleCVAction('create')">Tạo CV</a></li>
+              <li><a href="#" onclick="event.preventDefault(); handleCVAction('upload')">Tải lên file CV</a></li>
+              <li><a href="#" onclick="event.preventDefault(); handleCVAction('create-ai')">Tạo CV bằng AI <span class="badge-n">N</span></a></li>
+              <li><a href="#" onclick="event.preventDefault(); handleCVAction('evaluate-ai')">Đánh giá CV bằng AI <span class="badge-n">N</span></a></li>
+            </ul>
+          </li>
+          <li><a href="#about" onclick="navigateTo('about')">Giới thiệu</a></li>
+          <li><a href="#contact" onclick="navigateTo('contact')">Liên hệ</a></li>
+        </ul>
+      </nav>
+
+      <!-- AUTHENTICATION DYNAMIC AREA -->
+      <div class="nav-auth" id="navAuthArea">
+        <div id="navGuestButtons" style="display: flex; gap: 12px;">
+          <a href="#login" onclick="navigateTo('login')" class="btn btn-text">Đăng nhập</a>
+          <a href="#register" onclick="navigateTo('register')" class="btn btn-primary">Đăng ký</a>
+        </div>
+        <div id="navbarUserSection" style="display: none; align-items: center; gap: 16px;">
+          <!-- Injected dynamically by JS -->
+        </div>
+      </div>
+    </header>
+
+    <!-- MAIN BODY SECTION -->
+    <main class="main-wrapper">
+
+      <!-- ========================================== -->
+      <!-- 1. HOME VIEW -->
+      <!-- ========================================== -->
+      <section id="homeView" class="content-container">
+        <!-- Hero Section -->
+        <div class="hero">
+          <img class="hero-banner-bg" src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80&w=1200" alt="Văn phòng làm việc hiện đại" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%221200%22 height=%22450%22><rect width=%22100%25%22 height=%22100%25%22 fill=%22%231a1a1a%22/><text x=%2250%25%22 y=%2250%25%22 fill=%22%23444%22 font-size=%2224%22 text-anchor=%22middle%22>Modern Office Image</text></svg>'">
+          <div class="hero-overlay"></div>
+          <h1>Khám phá cơ hội nghề nghiệp phù hợp với bạn</h1>
+          <p>Tìm kiếm hàng ngàn tin tuyển dụng chất lượng cao, kết nối trực tiếp với các nhà tuyển dụng công nghệ hàng đầu tại Việt Nam.</p>
+          
+          <!-- Search Bar -->
+          <form class="search-container" onsubmit="handleSearch(event)">
+            <div class="search-box">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+              <input type="text" id="searchKeyword" placeholder="Từ khóa, tên công việc, công ty...">
+            </div>
+            <div class="search-box">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a8 8 0 0 0-8 8c0 5.25 8 12 8 12s8-6.75 8-12a8 8 0 0 0-8-8z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+              <select id="searchLocation">
+                <option value="">Tất cả địa điểm</option>
+                <option value="Đà Nẵng">Đà Nẵng</option>
+                <option value="TP. HCM">TP. HCM</option>
+                <option value="Hà Nội">Hà Nội</option>
+              </select>
+            </div>
+            <div class="search-box">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+              <select id="searchType">
+                <option value="">Loại hình làm việc</option>
+                <option value="Full-time">Full-time</option>
+                <option value="Part-time">Part-time</option>
+                <option value="Remote">Remote</option>
+                <option value="Internship">Internship</option>
+              </select>
+            </div>
+            <button type="submit" class="btn btn-primary" style="padding: 12px 28px;">Tìm kiếm</button>
+          </form>
+        </div>
+
+        <!-- Statistics Grid -->
+        <div class="stats-grid" id="homeStatsGrid">
+          <div class="stat-card">
+            <div class="stat-icon">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
+            </div>
+            <div class="stat-info">
+              <h3 id="statTotalJobs">0</h3>
+              <p>Việc làm đang tuyển</p>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+            </div>
+            <div class="stat-info">
+              <h3 id="statTotalCompanies">0</h3>
+              <p>Công ty tuyển dụng</p>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle></svg>
+            </div>
+            <div class="stat-info">
+              <h3 id="statTotalCandidates">0</h3>
+              <p>Ứng viên tiềm năng</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Featured Jobs List -->
+        <div class="section-header">
+          <h2>Việc làm nổi bật</h2>
+          <a href="#jobs" onclick="navigateTo('jobs')" style="color: var(--primary); font-weight:600; font-size:14px; display:flex; align-items:center; gap:4px;">Xem tất cả <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a>
+        </div>
+        <div class="jobs-grid" id="featuredJobsList">
+          <!-- Rendered dynamically by JS -->
+        </div>
+
+        <!-- Featured Companies List -->
+        <div class="section-header">
+          <h2>Nhà tuyển dụng hàng đầu</h2>
+          <a href="#companies" onclick="navigateTo('companies')" style="color: var(--primary); font-weight:600; font-size:14px; display:flex; align-items:center; gap:4px;">Xem danh sách <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a>
+        </div>
+        <div class="companies-grid" id="featuredCompaniesList">
+          <!-- Rendered dynamically by JS -->
+        </div>
+
+        <!-- Footer Directories Section -->
+        <div class="directory-section">
+          <div class="directory-grid">
+            <div class="directory-column">
+              <h3>Việc theo ngành nghề</h3>
+              <ul>
+                <li><a href="#" onclick="event.preventDefault(); filterJobsByIndustry('Tài Chính/Ngân Hàng')">Việc làm Tài Chính/Ngân Hàng</a></li>
+                <li><a href="#" onclick="event.preventDefault(); filterJobsByIndustry('Kế Toán/Kiểm Toán')">Việc làm Kế Toán/Kiểm Toán</a></li>
+                <li><a href="#" onclick="event.preventDefault(); filterJobsByIndustry('Hành Chính/Văn Phòng')">Việc làm Hành Chính/Văn Phòng</a></li>
+                <li><a href="#" onclick="event.preventDefault(); filterJobsByIndustry('Kinh Doanh/Bán Hàng')">Việc làm Kinh Doanh/Bán Hàng</a></li>
+                <li><a href="#" onclick="event.preventDefault(); filterJobsByIndustry('Marketing/Quảng Cáo')">Việc làm Marketing/Quảng Cáo</a></li>
+                <li><a href="#" onclick="event.preventDefault(); filterJobsByIndustry('Xây dựng/Kiến Trúc')">Việc làm Xây dựng/Kiến Trúc</a></li>
+                <li><a href="#" onclick="event.preventDefault(); filterJobsByIndustry('Công Nghệ Thông Tin')">Việc làm Công Nghệ Thông Tin</a></li>
+                <li><a href="#" onclick="event.preventDefault(); filterJobsByIndustry('Nhân Sự')">Việc làm Nhân Sự</a></li>
+              </ul>
+            </div>
+            <div class="directory-column">
+              <h3>Việc theo địa điểm</h3>
+              <ul>
+                <li><a href="#" onclick="event.preventDefault(); filterJobsByLocation('Hồ Chí Minh')">Việc làm tại Hồ Chí Minh</a></li>
+                <li><a href="#" onclick="event.preventDefault(); filterJobsByLocation('Hà Nội')">Việc làm tại Hà Nội</a></li>
+                <li><a href="#" onclick="event.preventDefault(); filterJobsByLocation('Đà Nẵng')">Việc làm tại Đà Nẵng</a></li>
+                <li><a href="#" onclick="event.preventDefault(); filterJobsByLocation('Cần Thơ')">Việc làm tại Cần Thơ</a></li>
+                <li><a href="#" onclick="event.preventDefault(); filterJobsByLocation('Bình Dương')">Việc làm tại Bình Dương</a></li>
+                <li><a href="#" onclick="event.preventDefault(); filterJobsByLocation('Hải Phòng')">Việc làm tại Hải Phòng</a></li>
+                <li><a href="#" onclick="event.preventDefault(); filterJobsByLocation('Đồng Nai')">Việc làm tại Đồng Nai</a></li>
+                <li><a href="#" onclick="event.preventDefault(); filterJobsByLocation('Quảng Ninh')">Việc làm tại Quảng Ninh</a></li>
+              </ul>
+            </div>
+            <div class="directory-column">
+              <h3>Việc theo nhu cầu</h3>
+              <ul>
+                <li><a href="#" onclick="event.preventDefault(); filterJobsByRequirement('Tuyển Gấp')">Việc làm Tuyển Gấp</a></li>
+                <li><a href="#" onclick="event.preventDefault(); filterJobsByRequirement('Nổi Bật')">Việc làm Nổi Bật</a></li>
+                <li><a href="#" onclick="event.preventDefault(); filterJobsByRequirement('Lao động phổ thông')">Việc làm Lao động phổ thông</a></li>
+                <li><a href="#" onclick="event.preventDefault(); filterJobsByRequirement('Không cần bằng cấp')">Việc làm Không cần bằng cấp</a></li>
+                <li><a href="#" onclick="event.preventDefault(); filterJobsByRequirement('Online tại nhà')">Việc làm Online tại nhà</a></li>
+                <li><a href="#" onclick="event.preventDefault(); filterJobsByRequirement('Part-time')">Việc làm Part-time</a></li>
+                <li><a href="#" onclick="event.preventDefault(); filterJobsByRequirement('Thời vụ')">Việc làm Thời vụ</a></li>
+                <li><a href="#" onclick="event.preventDefault(); filterJobsByRequirement('Remote')">Việc làm Remote</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========================================== -->
+      <!-- 2. JOBS VIEW -->
+      <!-- ========================================== -->
+      <section id="jobsView" class="content-container" style="display: none;">
+        <div class="section-header">
+          <h2>Danh sách việc làm IT chất lượng cao</h2>
+        </div>
+        
+        <!-- Inside Filter Area -->
+        <div class="db-panel" style="margin-bottom: 32px; padding: 20px;">
+          <div class="search-container" style="max-width:100%;">
+            <div class="search-box">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+              <input type="text" id="jobsBoardKeyword" placeholder="Từ khóa tuyển dụng..." onkeyup="renderJobsBoard()">
+            </div>
+            <div class="search-box">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a8 8 0 0 0-8 8c0 5.25 8 12 8 12s8-6.75 8-12a8 8 0 0 0-8-8z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+              <select id="jobsBoardLocation" onchange="renderJobsBoard()">
+                <option value="">Tất cả địa điểm</option>
+                <option value="Đà Nẵng">Đà Nẵng</option>
+                <option value="TP. HCM">TP. HCM</option>
+                <option value="Hà Nội">Hà Nội</option>
+              </select>
+            </div>
+            <div class="search-box">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle></svg>
+              <select id="jobsBoardType" onchange="renderJobsBoard()">
+                <option value="">Loại hình làm việc</option>
+                <option value="Full-time">Full-time</option>
+                <option value="Part-time">Part-time</option>
+                <option value="Remote">Remote</option>
+                <option value="Internship">Internship</option>
+              </select>
+            </div>
+            <button type="button" class="btn btn-primary" onclick="renderJobsBoard()" style="padding: 12px 28px;">Tìm kiếm</button>
+          </div>
+        </div>
+
+        <!-- JobsGO Style Side-by-Side Grid Layout (Main Content + Sidebar) -->
+        <div class="jobs-layout-grid">
+          <!-- Left Main Area: Jobs list -->
+          <div class="jobs-main-area">
+            <!-- Jobs Sorting Filter Tabs Bar -->
+            <div class="jobs-filter-tabs-bar">
+              <div class="filter-tabs-left">
+                <span class="filter-label">Hiển thị</span>
+                <div class="filter-tab-item active" id="tab-sort-all" onclick="setJobsSort('all')">
+                  <span class="tab-dot"></span>
+                  Phù hợp nhất
+                </div>
+                <div class="filter-tab-item" id="tab-sort-newest" onclick="setJobsSort('newest')">
+                  <span class="tab-dot"></span>
+                  Việc mới đăng
+                </div>
+                <div class="filter-tab-item" id="tab-sort-updated" onclick="setJobsSort('updated')">
+                  <span class="tab-dot"></span>
+                  Mới cập nhật
+                </div>
+                <div class="filter-tab-item" id="tab-sort-high-salary" onclick="setJobsSort('high-salary')">
+                  <span class="tab-dot"></span>
+                  Lương cao
+                </div>
+              </div>
+              <div class="filter-tabs-right">
+                <span id="jobsCountInfo">Việc 1 - 0 / 0</span>
+              </div>
+            </div>
+
+            <div class="jobs-grid" id="jobsBoardList">
+              <!-- Rendered dynamically by JS -->
+            </div>
+          </div>
+          
+          <!-- Right Sidebar: Banner Promos & Category directories -->
+          <div class="jobs-sidebar-area">
+            <!-- Team Promo Banner (Carousel) -->
+            <div class="promo-banner-container" id="teamPromoCarousel">
+              <!-- Rendered dynamically via JS for 3 members -->
+            </div>
+
+            <!-- Industries Directory Card -->
+            <div class="job-go-card" style="padding: 20px; border-radius: 8px;">
+              <h3 class="job-go-section-title" style="border-left: 4px solid var(--primary); padding-left: 8px; margin-bottom: 16px;">Tìm theo ngành nghề</h3>
+              <ul class="sidebar-category-list">
+                <li><a href="#" onclick="event.preventDefault(); filterJobsByIndustry('Kinh Doanh/Bán Hàng')">Kinh Doanh/Bán Hàng</a></li>
+                <li><a href="#" onclick="event.preventDefault(); filterJobsByIndustry('Marketing/Quảng Cáo')">Chăm Sóc Khách Hàng</a></li>
+                <li><a href="#" onclick="event.preventDefault(); filterJobsByIndustry('Hành Chính/Văn Phòng')">Hành Chính/Văn Phòng</a></li>
+                <li><a href="#" onclick="event.preventDefault(); filterJobsByIndustry('Kế Toán/Kiểm Toán')">Kế Toán/Kiểm Toán</a></li>
+                <li><a href="#" onclick="event.preventDefault(); filterJobsByIndustry('Xây dựng/Kiến Trúc')">Xây Dựng/Kiến Trúc/Nội Thất</a></li>
+              </ul>
+            </div>
+
+            <!-- CV Creation Promo -->
+            <div class="job-go-card" style="padding: 24px 20px; border-radius: 8px; margin-top: 20px; background: linear-gradient(135deg, #f0fdfa, #ccfbf1); text-align: center; border: 1px solid #99f6e4; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);">
+              <div style="font-size: 48px; margin-bottom: 12px; filter: drop-shadow(0 4px 4px rgba(0,0,0,0.1));">📝</div>
+              <h3 style="font-size: 17px; font-weight: 800; color: #0f766e; margin-bottom: 10px;">Tạo CV Chuyên Nghiệp</h3>
+              <p style="font-size: 13px; color: #115e59; margin-bottom: 20px; line-height: 1.5;">Nổi bật trong mắt nhà tuyển dụng với những mẫu CV chuẩn ATS, thiết kế ấn tượng.</p>
+              <button class="btn" style="width: 100%; border-radius: 8px; font-weight: bold; background: #0f766e; color: white; padding: 12px; border: none; cursor: pointer; transition: all 0.2s;" onmouseover="this.style.background='#115e59'; this.style.transform='translateY(-2px)'" onmouseout="this.style.background='#0f766e'; this.style.transform='none'">TẠO CV NGAY</button>
+            </div>
+
+            <!-- Popular Keywords -->
+            <div class="job-go-card" style="padding: 20px; border-radius: 8px; margin-top: 20px; border: 1px solid var(--border-color);">
+              <h3 class="job-go-section-title" style="border-left: 4px solid var(--primary); padding-left: 8px; margin-bottom: 16px;">Từ khóa phổ biến</h3>
+              <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+                <span style="padding: 6px 12px; background: #f1f5f9; color: #475569; border-radius: 20px; font-size: 12px; cursor: pointer; transition: 0.2s; border: 1px solid transparent;" onmouseover="this.style.background='#e2e8f0'; this.style.color='#0f172a'; this.style.borderColor='#cbd5e1'" onmouseout="this.style.background='#f1f5f9'; this.style.color='#475569'; this.style.borderColor='transparent'" onclick="document.getElementById('jobsBoardKeyword').value = 'Java'; renderJobsBoard();">Java Backend</span>
+                <span style="padding: 6px 12px; background: #f1f5f9; color: #475569; border-radius: 20px; font-size: 12px; cursor: pointer; transition: 0.2s; border: 1px solid transparent;" onmouseover="this.style.background='#e2e8f0'; this.style.color='#0f172a'; this.style.borderColor='#cbd5e1'" onmouseout="this.style.background='#f1f5f9'; this.style.color='#475569'; this.style.borderColor='transparent'" onclick="document.getElementById('jobsBoardKeyword').value = 'ReactJS'; renderJobsBoard();">ReactJS</span>
+                <span style="padding: 6px 12px; background: #f1f5f9; color: #475569; border-radius: 20px; font-size: 12px; cursor: pointer; transition: 0.2s; border: 1px solid transparent;" onmouseover="this.style.background='#e2e8f0'; this.style.color='#0f172a'; this.style.borderColor='#cbd5e1'" onmouseout="this.style.background='#f1f5f9'; this.style.color='#475569'; this.style.borderColor='transparent'" onclick="document.getElementById('jobsBoardKeyword').value = 'Intern'; renderJobsBoard();">Thực tập sinh IT</span>
+                <span style="padding: 6px 12px; background: #f1f5f9; color: #475569; border-radius: 20px; font-size: 12px; cursor: pointer; transition: 0.2s; border: 1px solid transparent;" onmouseover="this.style.background='#e2e8f0'; this.style.color='#0f172a'; this.style.borderColor='#cbd5e1'" onmouseout="this.style.background='#f1f5f9'; this.style.color='#475569'; this.style.borderColor='transparent'" onclick="document.getElementById('jobsBoardKeyword').value = 'Data Analyst'; renderJobsBoard();">Data Analyst</span>
+                <span style="padding: 6px 12px; background: #f1f5f9; color: #475569; border-radius: 20px; font-size: 12px; cursor: pointer; transition: 0.2s; border: 1px solid transparent;" onmouseover="this.style.background='#e2e8f0'; this.style.color='#0f172a'; this.style.borderColor='#cbd5e1'" onmouseout="this.style.background='#f1f5f9'; this.style.color='#475569'; this.style.borderColor='transparent'" onclick="document.getElementById('jobsBoardKeyword').value = 'Kế toán'; renderJobsBoard();">Kế toán nội bộ</span>
+                <span style="padding: 6px 12px; background: #f1f5f9; color: #475569; border-radius: 20px; font-size: 12px; cursor: pointer; transition: 0.2s; border: 1px solid transparent;" onmouseover="this.style.background='#e2e8f0'; this.style.color='#0f172a'; this.style.borderColor='#cbd5e1'" onmouseout="this.style.background='#f1f5f9'; this.style.color='#475569'; this.style.borderColor='transparent'" onclick="document.getElementById('jobsBoardKeyword').value = 'Marketing'; renderJobsBoard();">Marketing</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========================================== -->
+      <!-- 3. COMPANIES VIEW -->
+      <!-- ========================================== -->
+      <section id="companiesView" class="content-container" style="display: none;">
+        <div class="section-header">
+          <h2>Nhà tuyển dụng nổi bật trên hệ thống</h2>
+        </div>
+        <div class="companies-grid" id="companiesListContainer" style="grid-template-columns: repeat(3, 1fr);">
+          <!-- Rendered dynamically by JS -->
+        </div>
+      </section>
+
+      <!-- ========================================== -->
+      <!-- 4. ABOUT VIEW -->
+      <!-- ========================================== -->
+      <section id="aboutView" class="content-container" style="display: none;">
+        <div class="db-panel" style="padding: 48px; max-width: 900px; margin: 0 auto;">
+          <h2 style="font-size:32px; margin-bottom: 24px; text-align:center; background:var(--accent-gradient); -webkit-background-clip:text; -webkit-text-fill-color:transparent;">Giới thiệu về PremiumJob</h2>
+          <p style="color:var(--text-muted); font-size:16px; margin-bottom: 20px; line-height: 1.8;">
+            PremiumJob là nền tảng tuyển dụng công nghệ chất lượng cao tại Việt Nam. Dự án được phát triển nhằm mục tiêu giải quyết bài toán kết nối nhanh chóng, hiệu quả giữa ứng viên chuyên môn cao và doanh nghiệp công nghệ trong thời đại số.
+          </p>
+          <p style="color:var(--text-muted); font-size:16px; margin-bottom: 32px; line-height: 1.8;">
+            Sản phẩm được thiết kế chuẩn UI/UX, hỗ trợ đầy đủ các tính năng nâng cao phục vụ cho **Đồ án Tốt nghiệp CNTT** thế hệ mới với giao diện Dark Mode thời thượng.
+          </p>
+          
+          <h3 style="font-size: 20px; margin-bottom: 16px; border-bottom:1px solid var(--border-color); padding-bottom:8px;">Thành viên nhóm dự án (SD2001)</h3>
+          <ul style="list-style:none; display:grid; grid-template-columns: repeat(3, 1fr); gap: 20px; text-align:center;">
+            <li class="db-panel" style="padding: 16px; margin-bottom:0; background:rgba(0,0,0,0.2);">
+              <div class="sidebar-avatar" style="margin: 0 auto 12px; width:48px; height:48px; font-size:18px;">K</div>
+              <strong>Phạm Trương Vĩ Khang</strong>
+              <div style="font-size:12px; color:var(--text-muted); margin-top:4px;">MSSV: TD01674</div>
+            </li>
+            <li class="db-panel" style="padding: 16px; margin-bottom:0; background:rgba(0,0,0,0.2);">
+              <div class="sidebar-avatar" style="margin: 0 auto 12px; width:48px; height:48px; font-size:18px;">H</div>
+              <strong>Nguyễn Hữu Gia Huy</strong>
+              <div style="font-size:12px; color:var(--text-muted); margin-top:4px;">MSSV: TD01686</div>
+            </li>
+            <li class="db-panel" style="padding: 16px; margin-bottom:0; background:rgba(0,0,0,0.2);">
+              <div class="sidebar-avatar" style="margin: 0 auto 12px; width:48px; height:48px; font-size:18px;">P</div>
+              <strong>Phan Ngọc Phong</strong>
+              <div style="font-size:12px; color:var(--text-muted); margin-top:4px;">MSSV: TD01622</div>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- ========================================== -->
+      <!-- 5. CONTACT VIEW -->
+      <!-- ========================================== -->
+      <section id="contactView" class="content-container" style="display: none;">
+        <div style="display:grid; grid-template-columns: 1fr 1.5fr; gap: 32px; max-width: 1000px; margin:0 auto;">
+          <div class="db-panel">
+            <h3>Thông tin liên hệ</h3>
+            <p style="color:var(--text-muted); margin-top:12px; font-size:14px; line-height: 1.6;">
+              Mọi góp ý hoặc phản ánh liên quan đến hoạt động của nền tảng PremiumJob, vui lòng liên hệ theo các kênh sau:
+            </p>
+            <div style="margin-top:24px; display:flex; flex-direction:column; gap:16px; font-size:14px;">
+              <div>📍 <strong>Địa chỉ:</strong> Quận Ngũ Hành Sơn, TP. Đà Nẵng</div>
+              <div>📞 <strong>Hotline:</strong> 0905.555.666</div>
+              <div>✉️ <strong>Email:</strong> support@premiumjob.vn</div>
+            </div>
+          </div>
+          <div class="db-panel">
+            <h3>Gửi yêu cầu hỗ trợ</h3>
+            <form style="margin-top:20px;" onsubmit="event.preventDefault(); showToast('Gửi tin nhắn liên hệ thành công!', 'success');">
+              <div class="form-group">
+                <label>Họ và tên</label>
+                <input type="text" class="input-field" required>
+              </div>
+              <div class="form-group">
+                <label>Email liên hệ</label>
+                <input type="email" class="input-field" required>
+              </div>
+              <div class="form-group">
+                <label>Nội dung tin nhắn</label>
+                <textarea class="input-field" rows="4" style="resize:none;" required></textarea>
+              </div>
+              <button class="btn btn-primary" type="submit" style="width: 100%;">Gửi tin nhắn</button>
+            </form>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========================================== -->
+      <!-- 5B. JOB DETAIL VIEW (JobsGO Style) -->
+      <!-- ========================================== -->
+      <section id="jobDetailView" class="content-container" style="display: none; padding-top: 20px;">
+        <div class="job-go-container">
+          <!-- Search Bar -->
+          <div class="job-go-search-bar-wrap">
+            <div class="job-go-search-bar">
+              <div class="job-go-search-input-group">
+                <span class="job-go-search-icon">🔍</span>
+                <input type="text" id="jobDetailSearchKeyword" placeholder="Từ khóa: Việc, công ty, ngành nghề...">
+              </div>
+              <div class="job-go-search-input-group">
+                <span class="job-go-search-icon">📍</span>
+                <input type="text" id="jobDetailSearchLocation" placeholder="Địa điểm: Tỉnh/thành, quận...">
+              </div>
+              <button class="job-go-search-btn" onclick="executeJobDetailSearch()">TÌM VIỆC</button>
+            </div>
+          </div>
+
+          <!-- Breadcrumbs -->
+          <div class="job-go-breadcrumbs" id="jobDetailBreadcrumbs">
+            <!-- Rendered dynamically -->
+          </div>
+
+          <!-- Two-column grid -->
+          <div class="job-go-grid">
+            <!-- Left Column: Main info -->
+            <div class="job-go-left">
+              <!-- Header Card -->
+              <div class="job-go-card job-go-header-card">
+                <h1 class="job-go-title" id="jobDetailTitle">...</h1>
+                
+                <div class="job-go-quick-grid">
+                  <div class="job-go-quick-item">
+                    <div class="job-go-quick-icon">💵</div>
+                    <div class="job-go-quick-text">
+                      <div class="job-go-quick-label">Mức lương:</div>
+                      <div class="job-go-quick-val" id="jobDetailSalary">...</div>
+                    </div>
+                  </div>
+                  <div class="job-go-quick-item">
+                    <div class="job-go-quick-icon">📍</div>
+                    <div class="job-go-quick-text">
+                      <div class="job-go-quick-label">Địa điểm:</div>
+                      <div class="job-go-quick-val" id="jobDetailLocation">...</div>
+                    </div>
+                  </div>
+                  <div class="job-go-quick-item">
+                    <div class="job-go-quick-icon">👔</div>
+                    <div class="job-go-quick-text">
+                      <div class="job-go-quick-label">Kinh nghiệm:</div>
+                      <div class="job-go-quick-val" id="jobDetailExp">Không yêu cầu</div>
+                    </div>
+                  </div>
+                  <div class="job-go-quick-item">
+                    <div class="job-go-quick-icon">🎓</div>
+                    <div class="job-go-quick-text">
+                      <div class="job-go-quick-label">Bằng cấp:</div>
+                      <div class="job-go-quick-val" id="jobDetailDegree">Cao đẳng trở lên</div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="job-go-deadline" id="jobDetailDeadline">Hạn nộp hồ sơ: ...</div>
+
+                <div class="job-go-actions">
+                  <button class="job-go-btn job-go-btn-apply" id="jobDetailApplyBtn">
+                    <span>✈️</span> ỨNG TUYỂN NGAY
+                  </button>
+                  <button class="job-go-btn job-go-btn-chat" id="jobDetailChatBtn">
+                    <span>💬</span> Chat với NTD <span>▾</span>
+                  </button>
+                  <button class="job-go-btn-icon" id="jobDetailBookmarkBtn">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path></svg>
+                  </button>
+                  <button class="job-go-btn-icon" id="jobDetailShareBtn">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>
+                  </button>
+                </div>
+              </div>
+
+              <!-- Location Detail Card -->
+              <div class="job-go-card">
+                <h3 class="job-go-section-title">📍 Địa điểm làm việc</h3>
+                <div class="job-go-address-city" id="jobDetailWorkCity">...</div>
+                <div class="job-go-address-detail" id="jobDetailWorkAddress" style="margin-top:4px; font-size:14px; color:#475569;">...</div>
+              </div>
+
+              <!-- AI Matching Banner -->
+              <div class="job-go-ai-banner" id="jobDetailAiBanner">
+                <div style="display:flex; align-items:center; gap: 16px;">
+                  <div class="job-go-ai-robot">🤖</div>
+                  <div>
+                    <div style="font-weight:700; font-size:15px; color:#1e293b;">CV CỦA BẠN CÓ PHÙ HỢP VỚI VIỆC LÀM NÀY?</div>
+                    <div style="font-size:13px; color:#64748b; margin-top:2px;" id="jobDetailAiBannerText">Hãy đăng nhập để xem đánh giá độ tương thích ATS bằng AI của bạn!</div>
+                  </div>
+                </div>
+                <button class="job-go-ai-eval-btn" id="jobDetailAiBannerBtn">Đăng nhập để xem đánh giá!</button>
+              </div>
+
+              <!-- Job Details Main Card -->
+              <div class="job-go-card">
+                <h2 class="job-go-section-title" style="border-bottom:1.5px solid #f1f5f9; padding-bottom:12px; margin-bottom:16px;">Chi Tiết Công Việc</h2>
+                
+                <div class="job-go-detail-section">
+                  <h4 class="job-go-detail-subtitle">Mô tả Công việc:</h4>
+                  <ul class="job-go-list" id="jobDetailDescription">
+                    <!-- Rendered dynamically -->
+                  </ul>
+                </div>
+
+                <div class="job-go-detail-section">
+                  <h4 class="job-go-detail-subtitle">Yêu cầu Công việc:</h4>
+                  <ul class="job-go-list" id="jobDetailRequirements">
+                    <!-- Rendered dynamically -->
+                  </ul>
+                </div>
+
+                <div class="job-go-detail-section">
+                  <h4 class="job-go-detail-subtitle">Quyền lợi Được Hưởng:</h4>
+                  <ul class="job-go-list" id="jobDetailBenefits">
+                    <!-- Rendered dynamically -->
+                  </ul>
+                </div>
+
+                <div class="job-go-detail-section" style="border-top:1px solid #f1f5f9; padding-top:16px; margin-top:24px;">
+                  <span style="font-weight:600; font-size:14px; color:#475569; margin-right:8px;">Ngành nghề:</span>
+                  <span id="jobDetailCategoryBadges">
+                    <!-- Badges rendered dynamically -->
+                  </span>
+                </div>
+
+                <!-- Bottom Actions -->
+                <div class="job-go-actions" style="margin-top:32px; border-top:1px solid #f1f5f9; padding-top:24px;">
+                  <button class="job-go-btn job-go-btn-apply" id="jobDetailApplyBtnBottom">
+                    <span>✈️</span> ỨNG TUYỂN NGAY
+                  </button>
+                  <button class="job-go-btn job-go-btn-chat" id="jobDetailChatBtnBottom">
+                    <span>💬</span> Chat với NTD <span>▾</span>
+                  </button>
+                  <button class="job-go-btn-icon" id="jobDetailBookmarkBtnBottom">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path></svg>
+                  </button>
+                  <button class="job-go-btn-icon" id="jobDetailShareBtnBottom">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>
+                  </button>
+                </div>
+              </div>
+
+              <!-- Warning Banner -->
+              <div class="job-go-warning-banner" id="jobDetailWarningBanner">
+                <!-- Content set dynamically or statically -->
+              </div>
+
+              <!-- Suggested Jobs -->
+              <div class="job-go-card">
+                <h3 class="job-go-section-title" style="margin-bottom:16px;">Việc Làm Gợi Ý</h3>
+                <div class="job-go-suggested-list" id="jobDetailSuggestedJobs">
+                  <!-- Rendered dynamically -->
+                </div>
+              </div>
+            </div>
+
+            <!-- Right Column: Sidebar -->
+            <div class="job-go-right">
+              <!-- Video Placeholder Card -->
+              <div class="job-go-card" style="padding:0; overflow:hidden;">
+                <div class="job-go-video-wrap">
+                  <div class="job-go-video-placeholder">
+                    <div class="job-go-video-icon">🚫</div>
+                    <div style="font-size:12px; color:#cbd5e1; margin-top:8px;">This video is unavailable</div>
+                  </div>
+                </div>
+                <div style="padding:16px; display:flex; align-items:center; gap:12px;">
+                  <div class="job-go-sidebar-logo" id="jobDetailSidebarLogo"></div>
+                  <div style="min-width:0; flex:1;">
+                    <h4 class="job-go-sidebar-comp-name" id="jobDetailSidebarCompName" style="white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">...</h4>
+                    <div class="job-go-sidebar-comp-field" id="jobDetailSidebarCompField">Lĩnh vực: Công nghệ</div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- General Info Card -->
+              <div class="job-go-card">
+                <h3 class="job-go-section-title" style="margin-bottom:16px; border-bottom:1px solid #f1f5f9; padding-bottom:8px;">Thông tin chung</h3>
+                <div class="job-go-info-table">
+                  <div class="job-go-info-row">
+                    <span class="job-go-info-label">💼 Loại hình:</span>
+                    <span class="job-go-info-val" id="jobDetailInfoType">Toàn thời gian</span>
+                  </div>
+                  <div class="job-go-info-row">
+                    <span class="job-go-info-label">👤 Cấp bậc:</span>
+                    <span class="job-go-info-val" id="jobDetailInfoLevel">Nhân viên/Chuyên viên</span>
+                  </div>
+                  <div class="job-go-info-row">
+                    <span class="job-go-info-label">📅 Ngày đăng:</span>
+                    <span class="job-go-info-val" id="jobDetailInfoDate">...</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Similar Jobs Card -->
+              <div class="job-go-card">
+                <h3 class="job-go-section-title" style="margin-bottom:16px; border-bottom:1px solid #f1f5f9; padding-bottom:8px;">Việc Làm Tương Tự</h3>
+                <div class="job-go-sidebar-list" id="jobDetailSimilarJobs">
+                  <!-- Rendered dynamically -->
+                </div>
+              </div>
+
+              <!-- AI Banner -->
+              <div class="job-go-sidebar-ai-banner" id="jobDetailSidebarAiBanner">
+                <div class="job-go-sidebar-ai-badge">AI</div>
+                <h3>ĐÁNH GIÁ CV</h3>
+                <h2>JOBSGO AI</h2>
+                <div class="job-go-sidebar-ai-robot-img">🤖</div>
+              </div>
+
+              <!-- Recently Viewed Jobs -->
+              <div class="job-go-card">
+                <h3 class="job-go-section-title" style="margin-bottom:16px; border-bottom:1px solid #f1f5f9; padding-bottom:8px; display:flex; justify-content:space-between; align-items:center;">
+                  <span>Việc Làm Đã Xem</span>
+                  <span style="font-size:16px; color:#94a3b8; font-weight:normal;">›</span>
+                </h3>
+                <div class="job-go-sidebar-list" id="jobDetailRecentlyViewed">
+                  <!-- Rendered dynamically -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========================================== -->
+      <!-- 6. LOGIN VIEW -->
+      <!-- ========================================== -->
+      <section id="loginView" style="display: none;">
+        <div class="auth-page">
+          <div class="auth-bg-glow-orb orb-1"></div>
+          <div class="auth-bg-glow-orb orb-2"></div>
+          <div class="auth-bg-glow-orb orb-3"></div>
+          <div class="floating-particle part-1">&lt;/&gt;</div>
+          <div class="floating-particle part-2">{ }</div>
+          <div class="floating-particle part-3">✓</div>
+          <div class="floating-particle part-4">&gt;_</div>
+          <div class="auth-card">
+            <div class="auth-header">
+              <h2>Đăng nhập Hệ thống</h2>
+              <p>Chào mừng bạn đến với PremiumJob</p>
+            </div>
+
+            <form id="loginForm" onsubmit="loginAction(event)">
+              <div class="form-group">
+                <label for="loginEmail">Email</label>
+                <div class="input-wrapper">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                  <input type="email" id="loginEmail" class="input-field" placeholder="name@domain.com" required>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="loginPassword">Mật khẩu</label>
+                <div class="input-wrapper">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+                  <input type="password" id="loginPassword" class="input-field" placeholder="••••••••" required>
+                </div>
+              </div>
+
+              <div class="form-options">
+                <label class="checkbox-group">
+                  <input type="checkbox" id="loginRemember">
+                  Ghi nhớ đăng nhập
+                </label>
+                <a href="#" onclick="event.preventDefault(); showToast('Tính năng lấy lại mật khẩu đang được nâng cấp!', 'warning')" class="forgot-link">Quên mật khẩu?</a>
+              </div>
+
+              <button type="submit" class="btn btn-primary" style="width: 100%; padding: 12px 0; font-size:15px;">Đăng nhập</button>
+              
+              <div class="social-auth">
+                <p>Hoặc đăng nhập bằng</p>
+                <button type="button" class="btn btn-google" onclick="showToast('Đang mô phỏng kết nối Google OAuth...', 'info')">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+                  Google Account
+                </button>
+              </div>
+            </form>
+
+            <div class="auth-footer">
+              Bạn chưa có tài khoản? <a href="#register" onclick="navigateTo('register')">Đăng ký ngay</a>
+            </div>
+
+            <!-- Helper legends for grader -->
+            <div class="test-accounts">
+              <h4>🔑 Tài khoản Test Đồ án (Bấm để điền nhanh)</h4>
+              <p style="cursor:pointer;" onclick="fillDemoCredentials('candidate')"> ứng viên: <code>candidate@gmail.com</code> / <code>123456</code></p>
+              <p style="cursor:pointer;" onclick="fillDemoCredentials('recruiter')"> tuyển dụng: <code>recruiter@gmail.com</code> / <code>123456</code></p>
+              <p style="cursor:pointer;" onclick="fillDemoCredentials('admin')"> quản trị viên: <code>admin@gmail.com</code> / <code>123456</code></p>
+            </div>
+          </div>
+
+          <!-- 3D Promo Panel -->
+          <div class="auth-promo-panel">
+            <img src="assets/auth_promo.png" alt="Mạng lưới doanh nghiệp công nghệ" class="auth-promo-image">
+            <div class="auth-promo-text">
+              <h3>Kết nối 3D Doanh nghiệp & Ứng viên</h3>
+              <p>Khám phá cơ hội nghề nghiệp IT mơ ước từ mạng lưới đối tác chiến lược FPT, VNG, Viettel, VinGroup và KMS.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========================================== -->
+      <!-- 7. REGISTER VIEW -->
+      <!-- ========================================== -->
+      <section id="registerView" style="display: none;">
+        <div class="auth-page">
+          <div class="auth-bg-glow-orb orb-1"></div>
+          <div class="auth-bg-glow-orb orb-2"></div>
+          <div class="auth-bg-glow-orb orb-3"></div>
+          <div class="floating-particle part-1">&lt;/&gt;</div>
+          <div class="floating-particle part-2">{ }</div>
+          <div class="floating-particle part-3">✓</div>
+          <div class="floating-particle part-4">&gt;_</div>
+          <div class="auth-card">
+            <div class="auth-header">
+              <h2>Tạo tài khoản mới</h2>
+              <p>Bắt đầu hành trình của bạn với PremiumJob</p>
+            </div>
+
+            <!-- Account Type Selection Toggle -->
+            <div class="role-toggle">
+              <button type="button" class="role-btn active" data-role="candidate" onclick="this.classList.add('active'); this.nextElementSibling.classList.remove('active');">Ứng viên</button>
+              <button type="button" class="role-btn" data-role="recruiter" onclick="this.classList.add('active'); this.previousElementSibling.classList.remove('active');">Nhà tuyển dụng</button>
+            </div>
+
+            <form id="registerForm" onsubmit="registerAction(event)">
+              <div class="form-group">
+                <label for="regName">Họ và tên</label>
+                <div class="input-wrapper">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                  <input type="text" id="regName" class="input-field" placeholder="Nguyễn Văn A" required>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="regEmail">Email</label>
+                <div class="input-wrapper">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                  <input type="email" id="regEmail" class="input-field" placeholder="name@domain.com" required>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="regPhone">Số điện thoại</label>
+                <div class="input-wrapper">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                  <input type="tel" id="regPhone" class="input-field" placeholder="0905123456" required>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="regPassword">Mật khẩu</label>
+                <div class="input-wrapper">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+                  <input type="password" id="regPassword" class="input-field" placeholder="••••••••" required>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="regConfirmPassword">Xác nhận mật khẩu</label>
+                <div class="input-wrapper">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+                  <input type="password" id="regConfirmPassword" class="input-field" placeholder="••••••••" required>
+                </div>
+              </div>
+
+              <div class="form-options">
+                <label class="checkbox-group">
+                  <input type="checkbox" id="regTerms" required>
+                  Tôi đồng ý với Điều khoản & Chính sách
+                </label>
+              </div>
+
+              <button type="submit" class="btn btn-primary" style="width: 100%; padding: 12px 0; font-size:15px;">Đăng ký tài khoản</button>
+            </form>
+
+            <div class="auth-footer">
+              Bạn đã có tài khoản? <a href="#login" onclick="navigateTo('login')">Đăng nhập</a>
+            </div>
+          </div>
+
+          <!-- 3D Promo Panel -->
+          <div class="auth-promo-panel">
+            <img src="assets/auth_promo.png" alt="Mạng lưới tuyển dụng công nghệ" class="auth-promo-image">
+            <div class="auth-promo-text">
+              <h3>Khởi đầu Sự nghiệp IT Chuyên nghiệp</h3>
+              <p>Tìm kiếm hàng ngàn cơ hội thực tập, việc làm Full-time, Remote hấp dẫn. PremiumJob đồng hành cùng sự thành công của bạn.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========================================== -->
+      <!-- 8. CANDIDATE DASHBOARD -->
+      <!-- ========================================== -->
+      <section id="candidateDashboardView" style="display: none;">
+        <div class="dashboard-container">
+          
+          <!-- Sidebar -->
+          <aside class="dashboard-sidebar" id="candidateSidebar">
+            <ul class="sidebar-menu">
+              <li class="sidebar-item active" data-tab="profile" onclick="renderCandidateDashboard('profile')">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                Hồ sơ cá nhân
+              </li>
+              <li class="sidebar-item" data-tab="tracking" onclick="renderCandidateDashboard('tracking')">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                Trạng thái ứng tuyển
+              </li>
+              <li class="sidebar-item" data-tab="saved" onclick="renderCandidateDashboard('saved')">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path></svg>
+                Việc làm đã lưu
+              </li>
+              <li class="sidebar-item" data-tab="password" onclick="renderCandidateDashboard('password')">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+                Đổi mật khẩu
+              </li>
+              <li class="sidebar-item" onclick="logoutAction()">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
+                Đăng xuất
+              </li>
+            </ul>
+            <div class="sidebar-user">
+              <div class="sidebar-avatar" id="candAvatarSidebar">C</div>
+              <div class="sidebar-user-info">
+                <div class="sidebar-username" id="candNameSidebar">Ứng viên</div>
+                <div class="sidebar-role">Ứng viên</div>
+              </div>
+            </div>
+          </aside>
+
+          <!-- Content Panel -->
+          <div class="dashboard-content">
+            
+            <!-- Tab: Profile Update -->
+            <div id="candidateProfileTab">
+              <div class="dashboard-header">
+                <div class="dashboard-title">
+                  <h2>Hồ sơ cá nhân</h2>
+                  <p>Cập nhật thông tin chi tiết để nâng cấp cơ hội ứng tuyển</p>
+                </div>
+              </div>
+              
+              <div class="profile-layout">
+                <!-- Avatar card -->
+                <div class="profile-avatar-card">
+                  <div class="avatar-upload-container">
+                    <div class="avatar-preview" id="candAvatarPreview">U</div>
+                    <label class="avatar-upload-btn">
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path><circle cx="12" cy="13" r="4"></circle></svg>
+                      <input type="file" accept="image/*" onchange="showToast('Đã cập nhật ảnh đại diện giả lập!', 'success')">
+                    </label>
+                  </div>
+                  <h3 class="profile-name" id="candProfileName">Ứng viên</h3>
+                  <p class="profile-title" id="candProfileTitle">Frontend Developer</p>
+                  
+                  <div style="border-top: 1px solid var(--border-color); padding-top: 20px; text-align: left;">
+                    <h4 style="font-size:13px; text-transform:uppercase; color:var(--text-muted); margin-bottom:8px;">CV Đính kèm hiện tại</h4>
+                    <div id="candCVBlock">
+                      <!-- Simulated dynamically by JS -->
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Info panel -->
+                <form class="db-panel" onsubmit="saveCandidateProfile(event)">
+                  <h3 style="margin-bottom:20px; font-size:18px;">Thông tin cá nhân</h3>
+                  <div style="display:grid; grid-template-columns: 1fr 1fr; gap:20px;">
+                    <div class="form-group">
+                      <label>Họ và tên</label>
+                      <input type="text" id="candNameInput" class="input-field" required>
+                    </div>
+                    <div class="form-group">
+                      <label>Email liên hệ (Không thể thay đổi)</label>
+                      <input type="email" id="candEmailInput" class="input-field" disabled>
+                    </div>
+                  </div>
+                  <div style="display:grid; grid-template-columns: 1fr 1fr; gap:20px;">
+                    <div class="form-group">
+                      <label>Số điện thoại</label>
+                      <input type="tel" id="candPhoneInput" class="input-field" required>
+                    </div>
+                    <div class="form-group">
+                      <label>Vị trí mong muốn</label>
+                      <input type="text" id="candTitleInput" class="input-field" placeholder="Ví dụ: Java Developer, UI/UX Designer">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label>Tóm tắt kinh nghiệm làm việc</label>
+                    <textarea id="candExpInput" class="input-field" rows="3" style="resize:none;" placeholder="Mô tả ngắn gọn kinh nghiệm các dự án đã tham gia..."></textarea>
+                  </div>
+                  <div class="form-group">
+                    <label>Kỹ năng chuyên môn (Cách nhau bằng dấu phẩy)</label>
+                    <input type="text" id="candSkillsInput" class="input-field" placeholder="Ví dụ: HTML, CSS, JavaScript, Spring Boot">
+                  </div>
+                  
+                  <button type="submit" class="btn btn-primary" style="margin-top:10px;">Lưu cập nhật hồ sơ</button>
+                </form>
+              </div>
+            </div>
+
+            <!-- Tab: App Status Tracking -->
+            <div id="candidateTrackingTab" style="display: none;">
+              <div class="dashboard-header">
+                <div class="dashboard-title">
+                  <h2>Theo dõi Trạng thái ứng tuyển</h2>
+                  <p>Danh sách các vị trí bạn đã nộp hồ sơ CV</p>
+                </div>
+              </div>
+
+              <div class="db-panel" style="padding: 0;">
+                <div class="table-responsive">
+                  <table class="data-table">
+                    <thead>
+                      <tr>
+                        <th>STT</th>
+                        <th>Vị trí tuyển dụng</th>
+                        <th>Công ty</th>
+                        <th>Ngày nộp</th>
+                        <th>Trạng thái hồ sơ</th>
+                      </tr>
+                    </thead>
+                    <tbody id="candidateAppTableBody">
+                      <!-- Rendered dynamically by JS -->
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+
+            <!-- Tab: Saved Jobs -->
+            <div id="candidateSavedTab" style="display: none;">
+              <div class="dashboard-header">
+                <div class="dashboard-title">
+                  <h2>Việc làm đã lưu</h2>
+                  <p>Các công việc bạn đã quan tâm và lưu lại</p>
+                </div>
+              </div>
+              <div class="jobs-grid" id="candidateSavedList">
+                <!-- Rendered dynamically by JS -->
+              </div>
+            </div>
+
+            <!-- Tab: Password change -->
+            <div id="candidatePasswordTab" style="display: none;">
+              <div class="dashboard-header">
+                <div class="dashboard-title">
+                  <h2>Đổi mật khẩu tài khoản</h2>
+                  <p>Đảm bảo an toàn bảo mật thông tin cá nhân</p>
+                </div>
+              </div>
+              <form class="db-panel" style="max-width: 500px;" onsubmit="event.preventDefault(); changePasswordAction('candidate')">
+                <div class="form-group">
+                  <label>Mật khẩu hiện tại</label>
+                  <input type="password" id="candidateOldPass" class="input-field" required>
+                </div>
+                <div class="form-group">
+                  <label>Mật khẩu mới</label>
+                  <input type="password" id="candidateNewPass" class="input-field" required>
+                </div>
+                <div class="form-group">
+                  <label>Xác nhận mật khẩu mới</label>
+                  <input type="password" id="candidateConfirmNewPass" class="input-field" required>
+                </div>
+                <button type="submit" class="btn btn-primary" style="margin-top:10px;">Cập nhật mật khẩu</button>
+              </form>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- ========================================== -->
+      <!-- 9. RECRUITER DASHBOARD -->
+      <!-- ========================================== -->
+      <section id="recruiterDashboardView" style="display: none;">
+        <div class="dashboard-container">
+          
+          <!-- Sidebar -->
+          <aside class="dashboard-sidebar" id="recruiterSidebar">
+            <ul class="sidebar-menu">
+              <li class="sidebar-item active" data-tab="stats" onclick="renderRecruiterDashboard('stats')">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="9" rx="1"></rect><rect x="14" y="3" width="7" height="5" rx="1"></rect><rect x="14" y="12" width="7" height="9" rx="1"></rect><rect x="3" y="16" width="7" height="5" rx="1"></rect></svg>
+                Thống kê tuyển dụng
+              </li>
+              <li class="sidebar-item" data-tab="post" onclick="renderRecruiterDashboard('post')">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                Đăng tin tuyển dụng
+              </li>
+              <li class="sidebar-item" data-tab="jobs" onclick="renderRecruiterDashboard('jobs')">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+                Quản lý tin tuyển dụng
+              </li>
+              <li class="sidebar-item" data-tab="candidates" onclick="renderRecruiterDashboard('candidates')">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                Hồ sơ ứng tuyển
+              </li>
+              <li class="sidebar-item" data-tab="company" onclick="renderRecruiterDashboard('company')">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
+                Hồ sơ công ty
+              </li>
+              <li class="sidebar-item" data-tab="password" onclick="renderRecruiterDashboard('password')">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+                Đổi mật khẩu
+              </li>
+              <li class="sidebar-item" onclick="logoutAction()">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
+                Đăng xuất
+              </li>
+            </ul>
+            <div class="sidebar-user">
+              <div class="sidebar-avatar" id="recAvatarSidebar">N</div>
+              <div class="sidebar-user-info">
+                <div class="sidebar-username" id="recNameSidebar">Nhà tuyển dụng</div>
+                <div class="sidebar-role" id="recCompanySidebar">FPT Software</div>
+              </div>
+            </div>
+          </aside>
+
+          <!-- Content Panel -->
+          <div class="dashboard-content">
+            
+            <!-- Tab: Stats Dashboard -->
+            <div id="recruiterStatsTab">
+              <div class="dashboard-header">
+                <div class="dashboard-title">
+                  <h2>Thống kê tuyển dụng doanh nghiệp</h2>
+                  <p>Giám sát hiệu quả hiển thị tin tuyển dụng và lượng hồ sơ ứng tuyển</p>
+                </div>
+              </div>
+
+              <!-- Stat row -->
+              <div class="db-stats-grid">
+                <div class="db-stat-card primary">
+                  <div class="db-stat-info">
+                    <h4>Tổng tin đăng</h4>
+                    <p id="recTotalPosts">0</p>
+                  </div>
+                  <div class="db-stat-icon">📄</div>
+                </div>
+                <div class="db-stat-card warning">
+                  <div class="db-stat-info">
+                    <h4>Tin chờ duyệt</h4>
+                    <p id="recTotalPendingPosts">0</p>
+                  </div>
+                  <div class="db-stat-icon">⏳</div>
+                </div>
+                <div class="db-stat-card indigo">
+                  <div class="db-stat-info">
+                    <h4>Tổng hồ sơ nhận</h4>
+                    <p id="recTotalApps">0</p>
+                  </div>
+                  <div class="db-stat-icon">👥</div>
+                </div>
+                <div class="db-stat-card success">
+                  <div class="db-stat-info">
+                    <h4>Hồ sơ chờ duyệt</h4>
+                    <p id="recPendingApps">0</p>
+                  </div>
+                  <div class="db-stat-icon">📥</div>
+                </div>
+              </div>
+
+              <!-- Stats SVG Graphic -->
+              <div class="db-panel">
+                <h3 style="margin-bottom:20px; font-size:16px;">Biểu đồ thống kê hồ sơ ứng viên nộp theo bài đăng (Top 5)</h3>
+                <div id="recruiterChartContainer" class="chart-container" style="height:220px;">
+                  <!-- Rendered dynamically by JS -->
+                </div>
+              </div>
+            </div>
+
+            <!-- Tab: Job Post form -->
+            <div id="recruiterPostTab" style="display: none;">
+              <div class="dashboard-header">
+                <div class="dashboard-title">
+                  <h2 id="jobPostFormHeader">Đăng tin tuyển dụng mới</h2>
+                  <p>Tin đăng sau khi tạo sẽ được gửi qua Admin duyệt trước khi công bố lên Trang chủ</p>
+                </div>
+              </div>
+
+              <form class="db-panel" onsubmit="submitJobPost(event)">
+                <input type="hidden" id="postIdInput">
+                <div class="form-group">
+                  <label>Tiêu đề công việc</label>
+                  <input type="text" id="postTitle" class="input-field" placeholder="Ví dụ: Senior Java Backend Developer" required>
+                </div>
+                
+                <div style="display:grid; grid-template-columns: 1fr 1fr; gap:20px;">
+                  <div class="form-group">
+                    <label>Mức lương</label>
+                    <input type="text" id="postSalary" class="input-field" placeholder="Ví dụ: 1,500 - 2,500 USD hoặc Thỏa thuận" required>
+                  </div>
+                  <div class="form-group">
+                    <label>Hạn nộp hồ sơ</label>
+                    <input type="date" id="postDeadline" class="input-field" required>
+                  </div>
+                </div>
+
+                <div style="display:grid; grid-template-columns: 1fr 1fr; gap:20px;">
+                  <div class="form-group">
+                    <label>Địa điểm làm việc</label>
+                    <select id="postLocation" class="input-field">
+                      <option value="Đà Nẵng">Đà Nẵng</option>
+                      <option value="TP. HCM">TP. HCM</option>
+                      <option value="Hà Nội">Hà Nội</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label>Loại hình làm việc</label>
+                    <select id="postType" class="input-field">
+                      <option value="Full-time">Full-time</option>
+                      <option value="Part-time">Part-time</option>
+                      <option value="Remote">Remote</option>
+                      <option value="Internship">Internship</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label>Mô tả công việc</label>
+                  <textarea id="postDesc" class="input-field" rows="4" style="resize:none;" placeholder="Mô tả trách nhiệm của công việc..." required></textarea>
+                </div>
+
+                <div class="form-group">
+                  <label>Yêu cầu công việc</label>
+                  <textarea id="postReq" class="input-field" rows="4" style="resize:none;" placeholder="Yêu cầu về kỹ năng, kinh nghiệm..." required></textarea>
+                </div>
+
+                <div class="form-group">
+                  <label>Quyền lợi được hưởng</label>
+                  <textarea id="postBene" class="input-field" rows="4" style="resize:none;" placeholder="Mức lương thưởng, bảo hiểm, kỳ nghỉ mát..." required></textarea>
+                </div>
+
+                <button type="submit" id="btnSubmitPost" class="btn btn-primary" style="margin-top:10px;">Đăng tin tuyển dụng</button>
+              </form>
+            </div>
+
+            <!-- Tab: Manage Posted Jobs list -->
+            <div id="recruiterJobsTab" style="display: none;">
+              <div class="dashboard-header">
+                <div class="dashboard-title">
+                  <h2>Quản lý tin tuyển dụng đã đăng</h2>
+                  <p>Danh sách tất cả tin tuyển dụng của công ty bạn</p>
+                </div>
+              </div>
+
+              <div class="db-panel" style="padding:0;">
+                <div class="table-responsive">
+                  <table class="data-table">
+                    <thead>
+                      <tr>
+                        <th>STT</th>
+                        <th>Tiêu đề tin</th>
+                        <th>Địa điểm</th>
+                        <th>Mức lương</th>
+                        <th>Trạng thái</th>
+                        <th>Hành động</th>
+                      </tr>
+                    </thead>
+                    <tbody id="recruiterJobsTableBody">
+                      <!-- Rendered dynamically by JS -->
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+
+            <!-- Tab: View application profiles -->
+            <div id="recruiterCandidatesTab" style="display: none;">
+              <div class="dashboard-header">
+                <div class="dashboard-title">
+                  <h2>Quản lý hồ sơ ứng tuyển của ứng viên</h2>
+                  <p>Duyệt, xem CV và cập nhật kết quả hồ sơ của các ứng viên ứng tuyển</p>
+                </div>
+              </div>
+
+              <div class="db-panel" style="padding:0;">
+                <div class="table-responsive">
+                  <table class="data-table">
+                    <thead>
+                      <tr>
+                        <th>STT</th>
+                        <th>Họ tên ứng viên</th>
+                        <th>Vị trí nộp</th>
+                        <th>Số điện thoại</th>
+                        <th>CV đính kèm</th>
+                        <th>Trạng thái</th>
+                        <th>Hành động duyệt</th>
+                      </tr>
+                    </thead>
+                    <tbody id="recruiterCandidatesTableBody">
+                      <!-- Rendered dynamically by JS -->
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+
+            <!-- Tab: Company profile edit -->
+            <div id="recruiterCompanyTab" style="display: none;">
+              <div class="dashboard-header">
+                <div class="dashboard-title">
+                  <h2>Thông tin hồ sơ công ty</h2>
+                  <p>Cập nhật mô tả doanh nghiệp hiển thị tới tất cả ứng viên</p>
+                </div>
+              </div>
+
+              <div class="profile-layout">
+                <!-- Comp card info preview -->
+                <div class="profile-avatar-card">
+                  <div class="company-logo" id="recCompLogoPreview" style="width:100px; height:100px; font-size:36px; margin:0 auto 20px;">FPT</div>
+                  <h3 class="profile-name" id="recCompTitle">FPT Software</h3>
+                  <p class="profile-title" style="margin-bottom:0;">Nhà tuyển dụng công nghệ</p>
+                </div>
+
+                <!-- Form edit company details -->
+                <form class="db-panel" onsubmit="saveRecruiterCompany(event)">
+                  <h3 style="margin-bottom:20px; font-size:18px;">Thông tin doanh nghiệp</h3>
+                  <div style="display:grid; grid-template-columns: 1fr 1fr; gap:20px;">
+                    <div class="form-group">
+                      <label>Tên doanh nghiệp</label>
+                      <input type="text" id="recCompNameInput" class="input-field" required>
+                    </div>
+                    <div class="form-group">
+                      <label>Logo viết tắt (2-3 ký tự)</label>
+                      <input type="text" id="recCompLogoInput" class="input-field" placeholder="Ví dụ: VNG, FPT" required>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label>Trụ sở chính</label>
+                    <input type="text" id="recCompLocInput" class="input-field" placeholder="Ví dụ: Đà Nẵng, TP. HCM" required>
+                  </div>
+                  <div class="form-group">
+                    <label>Mô tả ngắn gọn về doanh nghiệp</label>
+                    <textarea id="recCompDescInput" class="input-field" rows="4" style="resize:none;" placeholder="Lĩnh vực hoạt động, quy mô công ty..." required></textarea>
+                  </div>
+
+                  <button type="submit" class="btn btn-primary">Lưu cập nhật công ty</button>
+                </form>
+              </div>
+            </div>
+
+            <!-- Tab: Password change -->
+            <div id="recruiterPasswordTab" style="display: none;">
+              <div class="dashboard-header">
+                <div class="dashboard-title">
+                  <h2>Đổi mật khẩu tài khoản</h2>
+                  <p>Bảo mật mật khẩu nhà tuyển dụng</p>
+                </div>
+              </div>
+              <form class="db-panel" style="max-width: 500px;" onsubmit="event.preventDefault(); changePasswordAction('recruiter')">
+                <div class="form-group">
+                  <label>Mật khẩu hiện tại</label>
+                  <input type="password" id="recruiterOldPass" class="input-field" required>
+                </div>
+                <div class="form-group">
+                  <label>Mật khẩu mới</label>
+                  <input type="password" id="recruiterNewPass" class="input-field" required>
+                </div>
+                <div class="form-group">
+                  <label>Xác nhận mật khẩu mới</label>
+                  <input type="password" id="recruiterConfirmNewPass" class="input-field" required>
+                </div>
+                <button type="submit" class="btn btn-primary" style="margin-top:10px;">Cập nhật mật khẩu</button>
+              </form>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- ========================================== -->
+      <!-- 10. ADMIN DASHBOARD -->
+      <!-- ========================================== -->
+      <section id="adminDashboardView" style="display: none;">
+        <div class="dashboard-container">
+          
+          <!-- Sidebar -->
+          <aside class="dashboard-sidebar" id="adminSidebar">
+            <ul class="sidebar-menu">
+              <li class="sidebar-item active" data-tab="stats" onclick="renderAdminDashboard('stats')">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
+                Thống kê hệ thống
+              </li>
+              <li class="sidebar-item" data-tab="users" onclick="renderAdminDashboard('users')">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                Quản lý người dùng
+              </li>
+              <li class="sidebar-item" data-tab="jobs" onclick="renderAdminDashboard('jobs')">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                Kiểm duyệt tin đăng
+              </li>
+              <li class="sidebar-item" data-tab="violations" onclick="renderAdminDashboard('violations')">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+                Báo cáo vi phạm
+              </li>
+              <li class="sidebar-item" data-tab="password" onclick="renderAdminDashboard('password')">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+                Đổi mật khẩu
+              </li>
+              <li class="sidebar-item" onclick="logoutAction()">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
+                Đăng xuất
+              </li>
+            </ul>
+            <div class="sidebar-user">
+              <div class="sidebar-avatar" style="background:var(--accent-gradient);">A</div>
+              <div class="sidebar-user-info">
+                <div class="sidebar-username">Quản trị viên</div>
+                <div class="sidebar-role">Hệ thống</div>
+              </div>
+            </div>
+          </aside>
+
+          <!-- Content Panel -->
+          <div class="dashboard-content">
+            
+            <!-- Tab: System Stats -->
+            <div id="adminStatsTab">
+              <div class="dashboard-header">
+                <div class="dashboard-title">
+                  <h2>Hệ thống quản trị PremiumJob</h2>
+                  <p>Tổng quan số liệu vận hành và kiểm soát an ninh hệ thống</p>
+                </div>
+              </div>
+
+              <!-- Stats row -->
+              <div class="db-stats-grid">
+                <div class="db-stat-card primary">
+                  <div class="db-stat-info">
+                    <h4>Tổng người dùng</h4>
+                    <p id="admTotalUsers">0</p>
+                  </div>
+                  <div class="db-stat-icon">👥</div>
+                </div>
+                <div class="db-stat-card indigo">
+                  <div class="db-stat-info">
+                    <h4>Tổng tin tuyển dụng</h4>
+                    <p id="admTotalJobs">0</p>
+                  </div>
+                  <div class="db-stat-icon">📄</div>
+                </div>
+                <div class="db-stat-card success">
+                  <div class="db-stat-info">
+                    <h4>Hồ sơ ứng tuyển</h4>
+                    <p id="admTotalApps">0</p>
+                  </div>
+                  <div class="db-stat-icon">📥</div>
+                </div>
+                <div class="db-stat-card warning">
+                  <div class="db-stat-info">
+                    <h4>Tin đang chờ duyệt</h4>
+                    <p id="admTotalPendingJobs">0</p>
+                  </div>
+                  <div class="db-stat-icon">⏳</div>
+                </div>
+              </div>
+
+              <!-- SVG charts grid -->
+              <div class="charts-grid">
+                <div class="chart-panel">
+                  <h4>Xu hướng đăng ký thành viên mới (Theo tháng)</h4>
+                  <div id="adminChartContainer1" class="chart-container">
+                    <!-- Dynamic SVG chart injected by JS -->
+                  </div>
+                </div>
+                <div class="chart-panel">
+                  <h4>Số lượng hồ sơ ứng tuyển theo Ngành nghề (Top 5)</h4>
+                  <div id="adminChartContainer2" class="chart-container">
+                    <!-- Dynamic SVG chart injected by JS -->
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Tab: User management -->
+            <div id="adminUsersTab" style="display: none;">
+              <div class="dashboard-header">
+                <div class="dashboard-title">
+                  <h2>Quản lý tài khoản người dùng</h2>
+                  <p>Theo dõi ứng viên, nhà tuyển dụng và khóa/mở khóa tài khoản vi phạm</p>
+                </div>
+              </div>
+
+              <div class="db-panel" style="padding: 0;">
+                <div class="table-responsive">
+                  <table class="data-table">
+                    <thead>
+                      <tr>
+                        <th>STT</th>
+                        <th>Họ tên người dùng</th>
+                        <th>Email liên hệ</th>
+                        <th>Vai trò</th>
+                        <th>Trạng thái</th>
+                        <th>Hành động khóa</th>
+                      </tr>
+                    </thead>
+                    <tbody id="adminUsersTableBody">
+                      <!-- Rendered dynamically by JS -->
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+
+            <!-- Tab: Job approval list -->
+            <div id="adminJobsTab" style="display: none;">
+              <div class="dashboard-header">
+                <div class="dashboard-title">
+                  <h2>Kiểm duyệt tin đăng tuyển dụng</h2>
+                  <p>Duyệt các bài đăng tuyển dụng mới từ phía nhà tuyển dụng</p>
+                </div>
+              </div>
+
+              <div class="db-panel" style="padding:0;">
+                <div class="table-responsive">
+                  <table class="data-table">
+                    <thead>
+                      <tr>
+                        <th>STT</th>
+                        <th>Tiêu đề tin tuyển dụng</th>
+                        <th>Tên công ty</th>
+                        <th>Địa điểm</th>
+                        <th>Hạn nộp</th>
+                        <th>Kiểm duyệt</th>
+                      </tr>
+                    </thead>
+                    <tbody id="adminModerationTableBody">
+                      <!-- Rendered dynamically by JS -->
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+
+            <!-- Tab: Report violations list -->
+            <div id="adminViolationsTab" style="display: none;">
+              <div class="dashboard-header">
+                <div class="dashboard-title">
+                  <h2>Danh sách báo cáo vi phạm</h2>
+                  <p>Kiểm tra các báo cáo vi phạm nội dung từ ứng viên để xử lý doanh nghiệp</p>
+                </div>
+              </div>
+
+              <div class="db-panel" style="padding: 0;">
+                <div class="table-responsive">
+                  <table class="data-table">
+                    <thead>
+                      <tr>
+                        <th>STT</th>
+                        <th>Người báo cáo</th>
+                        <th>Đối tượng bị báo cáo</th>
+                        <th>Lý do vi phạm</th>
+                        <th>Trạng thái</th>
+                        <th>Xử lý báo cáo</th>
+                      </tr>
+                    </thead>
+                    <tbody id="adminViolationsTableBody">
+                      <!-- Rendered dynamically by JS -->
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+
+            <!-- Tab: Password change -->
+            <div id="adminPasswordTab" style="display: none;">
+              <div class="dashboard-header">
+                <div class="dashboard-title">
+                  <h2>Đổi mật khẩu tài khoản</h2>
+                  <p>Thay đổi mật khẩu Admin tối cao</p>
+                </div>
+              </div>
+              <form class="db-panel" style="max-width: 500px;" onsubmit="event.preventDefault(); changePasswordAction('admin')">
+                <div class="form-group">
+                  <label>Mật khẩu hiện tại</label>
+                  <input type="password" id="adminOldPass" class="input-field" required>
+                </div>
+                <div class="form-group">
+                  <label>Mật khẩu mới</label>
+                  <input type="password" id="adminNewPass" class="input-field" required>
+                </div>
+                <div class="form-group">
+                  <label>Xác nhận mật khẩu mới</label>
+                  <input type="password" id="adminConfirmNewPass" class="input-field" required>
+                </div>
+                <button type="submit" class="btn btn-primary" style="margin-top:10px;">Cập nhật mật khẩu</button>
+              </form>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- FOOTER VIEW -->
+    <footer class="footer" id="publicFooter">
+      <div class="content-container" style="padding:0 20px;">
+        <div class="footer-grid">
+          <div class="footer-info">
+            <div class="logo">
+              <svg width="24" height="24" viewBox="0 0 32 32">
+                <path d="M6 10 C6 7.8 7.8 6 10 6 L22 6 C24.2 6 26 7.8 26 10 L26 22 C26 24.2 24.2 26 22 26 L10 26 C7.8 26 6 24.2 6 22 Z" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M12 18 L16 14 L20 18" stroke="url(#logoGradient)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                <circle cx="16" cy="11" r="2" fill="#3B82F6"/>
+              </svg>
+              <span>PremiumJob</span>
+            </div>
+            <p>Nền tảng kết nối nhân tài ngành Công nghệ thông tin hàng đầu tại Việt Nam. Tìm việc làm nhanh, uy tín chất lượng.</p>
+            <div class="social-links">
+              <a href="#" onclick="event.preventDefault();" class="social-btn" title="Facebook">FB</a>
+              <a href="#" onclick="event.preventDefault();" class="social-btn" title="LinkedIn">LN</a>
+              <a href="#" onclick="event.preventDefault();" class="social-btn" title="GitHub">GH</a>
+            </div>
+          </div>
+          
+          <div class="footer-col">
+            <h4>Dành cho ứng viên</h4>
+            <ul>
+              <li><a href="#jobs" onclick="navigateTo('jobs')">Tìm kiếm việc làm</a></li>
+              <li><a href="#companies" onclick="navigateTo('companies')">Khám phá công ty IT</a></li>
+              <li><a href="#login" onclick="navigateTo('login')">Hồ sơ cá nhân</a></li>
+            </ul>
+          </div>
+
+          <div class="footer-col">
+            <h4>Dành cho doanh nghiệp</h4>
+            <ul>
+              <li><a href="#register" onclick="navigateTo('register')">Đăng ký nhà tuyển dụng</a></li>
+              <li><a href="#login" onclick="navigateTo('login')">Đăng tin tuyển dụng</a></li>
+              <li><a href="#login" onclick="navigateTo('login')">Tìm kiếm hồ sơ ứng viên</a></li>
+            </ul>
+          </div>
+
+          <div class="footer-col">
+            <h4>Liên hệ & Hỗ trợ</h4>
+            <ul>
+              <li><a href="#about" onclick="navigateTo('about')">Về chúng tôi</a></li>
+              <li><a href="#contact" onclick="navigateTo('contact')">Gửi phản hồi liên hệ</a></li>
+              <li><a href="#" onclick="event.preventDefault(); showToast('Điều khoản chính sách đang được cập nhật!', 'info')">Chính sách bảo mật</a></li>
+            </ul>
+          </div>
+        </div>
+        
+        <div class="footer-bottom">
+          <div>&copy; 2026 PremiumJob. All rights reserved. Đồ án tốt nghiệp UDPM - Nhóm C3 (SD2001).</div>
+          <div>Bảo vệ dự án Java - FPT Polytechnic Đà Nẵng.</div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- ========================================== -->
+    <!-- MODALS & POPUPS SYSTEM -->
+    <!-- ========================================== -->
+
+    <!-- Modal 1: Guest restricted action warning popup -->
+    <div id="guestWarningModal" class="modal-overlay">
+      <div class="modal-content guest-warning-modal">
+        <div class="modal-body" style="padding:32px;">
+          <div class="warning-icon-wrapper">⚠️</div>
+          <h3>Yêu cầu Đăng nhập</h3>
+          <p>Vui lòng đăng nhập hoặc đăng ký tài khoản mới để sử dụng chức năng ứng tuyển, lưu tin tuyển dụng hoặc quản lý hồ sơ.</p>
+          <div class="guest-warning-actions">
+            <button class="btn btn-secondary" onclick="closeWarningModal()" style="padding:10px 20px;">Đóng lại</button>
+            <a href="#login" onclick="closeWarningModal(); navigateTo('login')" class="btn btn-outline" style="padding:10px 20px;">Đăng nhập</a>
+            <a href="#register" onclick="closeWarningModal(); navigateTo('register')" class="btn btn-primary" style="padding:10px 20px;">Đăng ký</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal 2: Job details modal -->
+    <div id="jobDetailModal" class="modal-overlay">
+      <div class="modal-content job-detail-modal">
+        <div class="modal-header">
+          <h3>Chi tiết tin đăng tuyển dụng</h3>
+          <button class="modal-close" onclick="closeJobDetailModal()">&times;</button>
+        </div>
+        <div class="modal-body" id="jobDetailsContent">
+          <!-- Rendered dynamically by JS -->
+        </div>
+        <div class="modal-footer" id="jobDetailModalFooter">
+          <!-- Rendered dynamically by JS -->
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal 3: Apply Job form modal -->
+    <div id="applyJobModal" class="modal-overlay">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3>Nộp đơn ứng tuyển việc làm</h3>
+          <button class="modal-close" onclick="closeApplyModal()">&times;</button>
+        </div>
+        <form onsubmit="submitApplyAction(event)">
+          <div class="modal-body">
+            <div class="form-group">
+              <label>Họ và tên người nộp</label>
+              <input type="text" id="applyName" class="input-field" required>
+            </div>
+            <div style="display:grid; grid-template-columns: 1fr 1fr; gap:16px;">
+              <div class="form-group">
+                <label>Email liên hệ</label>
+                <input type="email" id="applyEmail" class="input-field" required>
+              </div>
+              <div class="form-group">
+                <label>Số điện thoại</label>
+                <input type="tel" id="applyPhone" class="input-field" required>
+              </div>
+            </div>
+            
+            <div class="form-group">
+              <label>Vị trí ứng tuyển</label>
+              <input type="text" id="applyPosition" class="input-field" placeholder="Ví dụ: Java Developer, Thực tập sinh..." required>
+            </div>
+            
+            <div class="form-group">
+              <label>Kinh nghiệm làm việc & Các dự án</label>
+              <textarea id="applyExperience" class="input-field" rows="3" style="resize:none;" placeholder="Mô tả kinh nghiệm làm việc và các dự án bạn đã tham gia..." required></textarea>
+            </div>
+            
+            <div class="form-group">
+              <label>Thư giới thiệu / Thông tin bổ sung (Cover Letter)</label>
+              <textarea id="applyCoverLetter" class="input-field" rows="3" style="resize:none;" placeholder="Những thông tin cần thiết khác giúp bạn nổi bật trong buổi phỏng vấn..."></textarea>
+            </div>
+            
+            <div class="form-group">
+              <label>CV Đính kèm hiện tại</label>
+              <div id="applyCVPreview" style="margin-bottom:12px;">
+                <!-- Simulated CV file preview -->
+              </div>
+              <label class="btn btn-outline" style="cursor:pointer; display:inline-flex; width:100%; justify-content:center;">
+                📁 Tải lên CV khác (.pdf)
+                <input type="file" id="applyCVUpload" accept=".pdf" style="display:none;" onchange="handleApplyCVSelect(this)">
+              </label>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" onclick="closeApplyModal()">Hủy</button>
+            <button type="submit" class="btn btn-primary">Xác nhận ứng tuyển</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Modal 4: Candidate profile inspector (Recruiter view) -->
+    <div id="candidateInspectorModal" class="modal-overlay">
+      <div class="modal-content" style="max-width:550px;">
+        <div class="modal-header">
+          <h3>Thông tin hồ sơ ứng viên</h3>
+          <button class="modal-close" onclick="closeInspectorModal()">&times;</button>
+        </div>
+        <div class="modal-body" id="candidateInspectorContent">
+          <!-- Rendered dynamically by JS -->
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" onclick="closeInspectorModal()">Đóng</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal 5: Feedback Modal (Góp ý) -->
+    <div id="feedbackModal" class="modal-overlay">
+      <div class="modal-content" style="max-width: 500px;">
+        <div class="modal-header">
+          <h3>Góp ý ý kiến của bạn</h3>
+          <button class="modal-close" onclick="closeFeedbackDialog()">&times;</button>
+        </div>
+        <form onsubmit="submitFeedbackAction(event)">
+          <div class="modal-body">
+            <p style="color: var(--text-muted); font-size:13.5px; margin-bottom:16px;">
+              Ý kiến đóng góp của bạn sẽ giúp chúng tôi hoàn thiện hệ thống tuyển dụng PremiumJob tốt hơn. Hãy chia sẻ trải nghiệm của bạn!
+            </p>
+            <div class="form-group">
+              <label>Họ và tên</label>
+              <input type="text" id="feedbackName" class="input-field" placeholder="Nguyễn Văn A" required>
+            </div>
+            <div class="form-group">
+              <label>Email liên hệ</label>
+              <input type="email" id="feedbackEmail" class="input-field" placeholder="name@domain.com" required>
+            </div>
+            <div class="form-group">
+              <label>Mức độ hài lòng</label>
+              <div class="stars-rating" id="feedbackStars">
+                <span class="star-icon" data-rating="1" onclick="setFeedbackRating(1)">★</span>
+                <span class="star-icon" data-rating="2" onclick="setFeedbackRating(2)">★</span>
+                <span class="star-icon" data-rating="3" onclick="setFeedbackRating(3)">★</span>
+                <span class="star-icon" data-rating="4" onclick="setFeedbackRating(4)">★</span>
+                <span class="star-icon" data-rating="5" onclick="setFeedbackRating(5)">★</span>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Nội dung góp ý</label>
+              <textarea id="feedbackMessage" class="input-field" rows="4" style="resize: none;" placeholder="Nội dung ý kiến đóng góp hoặc lỗi bạn gặp phải..." required></textarea>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" onclick="closeFeedbackDialog()">Hủy</button>
+            <button type="submit" class="btn btn-primary">Gửi góp ý</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Modal 6: Support Modal (Hỗ trợ) -->
+    <div id="supportModal" class="modal-overlay">
+      <div class="modal-content" style="max-width: 550px;">
+        <div class="modal-header">
+          <h3>Trung tâm Hỗ trợ ứng viên</h3>
+          <button class="modal-close" onclick="closeSupportDialog()">&times;</button>
+        </div>
+        <div class="modal-body">
+          <h4 style="font-size: 14px; margin-bottom: 12px; font-weight:700;">Câu hỏi thường gặp (FAQ)</h4>
+          <div class="faq-list">
+            <div class="faq-item">
+              <div class="faq-question" onclick="toggleFaq(this)">
+                <span>Làm sao để lưu tin tuyển dụng?</span>
+                <span>▼</span>
+              </div>
+              <div class="faq-answer" style="display: none;">
+                Bạn chỉ cần nhấn vào biểu tượng Trái tim hoặc nút "Lưu việc làm" trên thẻ tin tuyển dụng. Chức năng này yêu cầu bạn phải đăng nhập tài khoản Ứng viên.
+              </div>
+            </div>
+            <div class="faq-item">
+              <div class="faq-question" onclick="toggleFaq(this)">
+                <span>Tôi có thể đổi ảnh đại diện và thông tin cá nhân ở đâu?</span>
+                <span>▼</span>
+              </div>
+              <div class="faq-answer" style="display: none;">
+                Sau khi đăng nhập tài khoản Ứng viên, hãy vào mục Dashboard Ứng viên -> Hồ sơ cá nhân. Tại đây bạn có thể cập nhật ảnh đại diện, số điện thoại, CV, kinh nghiệm và kỹ năng.
+              </div>
+            </div>
+            <div class="faq-item">
+              <div class="faq-question" onclick="toggleFaq(this)">
+                <span>Làm thế nào để ứng tuyển công việc?</span>
+                <span>▼</span>
+              </div>
+              <div class="faq-answer" style="display: none;">
+                Hãy click vào nút "Xem chi tiết" của công việc bạn quan tâm, sau đó nhấn "Ứng tuyển ngay". Một form điền thông tin và đính kèm CV sẽ hiện ra để bạn xác nhận gửi đi.
+              </div>
+            </div>
+          </div>
+
+          <h4 style="font-size: 14px; margin-top: 20px; margin-bottom: 8px; font-weight:700;">Trò chuyện cùng Trợ lý ảo</h4>
+          <div class="support-chat-sim">
+            <div class="chat-messages" id="supportChatMessages">
+              <div class="chat-bubble bot">Xin chào! Tôi có thể giúp gì cho bạn hôm nay? Hãy chọn các câu hỏi FAQ trên hoặc nhập tin nhắn của bạn bên dưới.</div>
+            </div>
+            <div class="chat-input-area">
+              <input type="text" id="supportChatInput" placeholder="Nhập tin nhắn..." onkeypress="handleChatKeyPress(event)">
+              <button class="chat-send-btn" onclick="sendChatMessage()">Gửi</button>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" onclick="closeSupportDialog()">Đóng</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal: Tạo CV -->
+    <div id="cvBuilderModal" class="modal-overlay">
+      <div class="modal-content" style="max-width: 600px;">
+        <div class="modal-header">
+          <h3>Công cụ Tạo CV Premium</h3>
+          <button class="modal-close" onclick="closeCVBuilderModal()">&times;</button>
+        </div>
+        <form onsubmit="submitCVBuilder(event)">
+          <div class="modal-body">
+            <div class="form-row" style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+              <div class="form-group">
+                <label>Họ và tên</label>
+                <input type="text" id="cvBuildName" class="input-field" required>
+              </div>
+              <div class="form-group">
+                <label>Vị trí ứng tuyển</label>
+                <input type="text" id="cvBuildTitle" class="input-field" placeholder="Ví dụ: Java Developer" required>
+              </div>
+            </div>
+            <div class="form-row" style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 12px;">
+              <div class="form-group">
+                <label>Số điện thoại</label>
+                <input type="tel" id="cvBuildPhone" class="input-field" required>
+              </div>
+              <div class="form-group">
+                <label>Email liên hệ</label>
+                <input type="email" id="cvBuildEmail" class="input-field" required>
+              </div>
+            </div>
+            <div class="form-group" style="margin-top: 12px;">
+              <label>Kỹ năng chuyên môn</label>
+              <textarea id="cvBuildSkills" class="input-field" rows="3" placeholder="Ví dụ: HTML, CSS, Spring Boot, SQL Server..." required></textarea>
+            </div>
+            <div class="form-group" style="margin-top: 12px;">
+              <label>Kinh nghiệm làm việc</label>
+              <textarea id="cvBuildExp" class="input-field" rows="3" placeholder="Ví dụ: 1 năm làm dự án, thực tập tại FPT..." required></textarea>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" onclick="closeCVBuilderModal()">Hủy</button>
+            <button type="submit" class="btn btn-primary">Tạo & Lưu CV</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Modal: Tạo CV bằng AI -->
+    <div id="aiCVGeneratorModal" class="modal-overlay">
+      <div class="modal-content" style="max-width: 550px;">
+        <div class="modal-header">
+          <h3>Trợ lý AI Tạo CV Tự động</h3>
+          <button class="modal-close" onclick="closeAiCVGeneratorModal()">&times;</button>
+        </div>
+        <div class="modal-body">
+          <p style="color: var(--text-muted); font-size:13.5px; margin-bottom:16px;">
+            Nhập vị trí công việc mơ ước và các kỹ năng của bạn. AI của PremiumJob sẽ tự động soạn thảo và xuất bản một bộ CV chuẩn ATS.
+          </p>
+          <div class="form-group">
+            <label>Mô tả vị trí & kỹ năng mong muốn</label>
+            <textarea id="aiCVPrompt" class="input-field" rows="4" style="resize: none;" placeholder="Ví dụ: Tôi muốn tạo CV vị trí NodeJS Developer có kỹ năng Express, MongoDB và AWS, kinh nghiệm thực tập 6 tháng..." required></textarea>
+          </div>
+          
+          <!-- Wave Loading Simulator -->
+          <div id="aiCVGeneratingLoader" style="display:none; text-align:center; margin-top:20px; padding: 20px;">
+            <div class="ai-loader-dots">
+              <span></span><span></span><span></span>
+            </div>
+            <div style="margin-top: 12px; font-weight:600; color: var(--primary);">AI đang phân tích và kiến tạo CV...</div>
+          </div>
+        </div>
+        <div class="modal-footer" id="aiCVGeneratorFooter">
+          <button type="button" class="btn btn-secondary" onclick="closeAiCVGeneratorModal()">Đóng</button>
+          <button type="button" class="btn btn-primary" onclick="generateCVWithAI()">Khởi tạo CV với AI</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal: Đánh giá CV bằng AI -->
+    <div id="aiCVEvaluatorModal" class="modal-overlay">
+      <div class="modal-content" style="max-width: 600px;">
+        <div class="modal-header">
+          <h3>AI Chấm Điểm & Đánh Giá CV</h3>
+          <button class="modal-close" onclick="closeAiCVEvaluatorModal()">&times;</button>
+        </div>
+        <div class="modal-body" id="aiCVEvaluatorBody">
+          <!-- Dynamically populated or showing evaluation results -->
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" onclick="closeAiCVEvaluatorModal()">Hoàn thành</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- FLOATING WIDGET GROUP -->
+    <div class="floating-widget-group">
+      <!-- Saved Jobs Badge/Button -->
+      <button class="floating-widget-item saved-jobs-widget" onclick="handleFloatingSavedJobsClick()" title="Việc làm đã lưu">
+        <div class="widget-icon-wrapper">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+          </svg>
+          <span class="widget-badge" id="floatingSavedBadge">0</span>
+        </div>
+      </button>
+
+      <!-- Share/Copy Link Button -->
+      <button class="floating-widget-item share-widget" onclick="copySiteLink()" title="Chia sẻ trang web">
+        <div class="widget-icon-wrapper">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+            <circle cx="9" cy="7" r="4"></circle>
+            <line x1="19" y1="8" x2="19" y2="14"></line>
+            <line x1="16" y1="11" x2="22" y2="11"></line>
+          </svg>
+        </div>
+      </button>
+
+      <!-- Feedback Button -->
+      <button class="floating-widget-item feedback-widget" onclick="openFeedbackDialog()" title="Góp ý">
+        <div class="widget-icon-wrapper">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+          </svg>
+        </div>
+        <span class="widget-label">Góp ý</span>
+      </button>
+
+      <!-- Support Button -->
+      <button class="floating-widget-item support-widget" onclick="openSupportDialog()" title="Hỗ trợ">
+        <div class="widget-icon-wrapper">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 18v-6a9 9 0 0 1 18 0v6"></path>
+            <path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"></path>
+          </svg>
+        </div>
+        <span class="widget-label">Hỗ trợ</span>
+      </button>
+    </div>
+
+  </div>
+
+  <script src="app.js?v=2"></script>
+</body>
+</html>
